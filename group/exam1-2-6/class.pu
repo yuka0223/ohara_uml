@@ -1,0 +1,80 @@
+@startuml 図書館システム クラス図（型付き）
+skinparam classAttributeIconSize 0
+
+
+' 利用者
+class 利用者 {
+  - 会員番号 : String
+  - 氏名 : String
+  - メールアドレス : String
+}
+
+class 学生 {
+  - 貸出上限 : int = 6
+}
+
+class 教職員 {
+  - 貸出上限 : int = 12
+}
+
+利用者 <|-- 学生
+利用者 <|-- 教職員
+
+class 本 {
+  - 管理番号 : String
+  - 状態 : enum {貸出中, 返却済, 予約中}
+}
+
+class 書籍 {
+}
+
+class 雑誌 {
+}
+
+本 <|-- 書籍
+本 <|-- 雑誌
+
+class 返却処理 {
+  - 管理番号 : String
+  - 会員番号 : String
+  - 返却日 : Date
+}
+
+class 予約情報 {
+  - 予約ID : String
+  - 書名 : String
+  - 会員番号 : String
+  - 予約日 : Date
+  - 状態 : enum {未通知, 通知済}
+}
+
+class 貸出履歴 {
+  - 履歴ID : String
+  - 管理番号 : String
+  - 会員番号 : String
+  - 貸出日 : Date
+  - 返却予定日 : Date
+  - 返却日 : Date
+}
+
+class メール通知処理 {
+  - 宛先メール : String
+  - 件名 : String
+  - 本文 : String
+  - 送信日時 : DateTime
+}
+
+利用者 --> 貸出処理
+利用者 --> 返却処理
+利用者 --> 予約情報
+利用者 --> 貸出履歴
+
+本 --> 貸出処理
+本 --> 返却処理
+本 --> 予約情報
+本 --> 貸出履歴
+
+貸出処理 --> 貸出履歴
+返却処理 --> 貸出履歴
+返却処理 --> メール通知処理
+予約情報 --> メール通知処理

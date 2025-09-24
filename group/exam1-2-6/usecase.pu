@@ -1,0 +1,22 @@
+@startuml  
+left to right direction
+
+actor 会員 as User
+actor 事務職員 as Staff
+
+rectangle 図書館システム {
+  usecase UC1 as "貸出受付\n（借りる本+学生証/職員証）"
+  usecase UC2 as "返却受付\n（返却本+予約者へ通知）"
+  usecase UC3 as "貸出予約\n（予約カード+学生証/職員証）"
+  usecase UC4 as "貸出履歴の閲覧\n（管理番号ごと）"
+}
+
+User -down-> UC1 : 借りる
+User -down-> UC2 : 返却する
+User -down-> UC3 : 予約する
+
+Staff -down-> UC1 : 貸出処理
+Staff -down-> UC2 : 返却処理・予約者へ通知
+Staff -down-> UC3 : 予約処理
+Staff -down-> UC4 : 履歴確認
+@enduml

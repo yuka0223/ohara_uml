@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+
+actor "図書館事務員" as Staff
+actor "予約者" as Reserver
+
+boundary ReturnScreen as "返却画面"
+
+control ReturnController as "返却処理コントローラ"
+
+entity Loan as "貸出情報"
+entity Book as "図書情報"
+entity Member as "会員情報"
+entity Reserve as "予約情報"
+
+' --- 基本フロー ---
+Staff --> ReturnScreen : 図書番号入力
+ReturnScreen --> ReturnController : 返却要求
+
+ReturnController --> Loan : 貸出情報削除
+ReturnController --> Book : 貸出可能に更新
+ReturnController --> Member : 貸出冊数を減算
+
+' --- 代替フロー ---
+ReturnController --> Reserve : 予約確認
+Reserve --> ReturnController : 予約あり
+ReturnController --> Reserver : メール通知
+
+@enduml
