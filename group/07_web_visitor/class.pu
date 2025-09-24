@@ -1,0 +1,21 @@
+@startuml  web訪問者システムクラス図
+skinparam classAttributeIconSize 0
+class visitor {
+-ユーザID:int
+-パスワード:String
+-名前:String
+-学校名:String
+-所属名:String
+-メールアドレス:String
+-電話番号:int
+-年齢:int
+
++訪問者の情報を登録():void
++訪問者の情報を参照():String
++自分が登録した情報を削除():boolean
++自分が登録した情報を変更():boolean
++ログインできる():boolean
++ログアウトができる():void
+}
+ 
+@enduml

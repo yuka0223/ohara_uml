@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+
+actor "図書館事務員" as Staff
+actor "予約者" as Reserver
+
+usecase "返却" as UC_Return
+usecase "メール通知" as UC_Notify
+
+Staff --> UC_Return
+UC_Return .> UC_Notify : <<extend>>
+Reserver <-- UC_Notify
+
+@enduml
